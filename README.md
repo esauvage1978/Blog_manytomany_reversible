@@ -8,9 +8,9 @@ Repository associé à un article du site https://blog.manuso.fr
 3. Remplacer LOGIN et MDP par vos informations
 4. Exécuter les commandes suivantes :
 
-*** php bin/console doctrine:database:create
-*** php bin/console doctrine:schema:update --force
-*** php bin/console cache:clear
+* php bin/console doctrine:database:create  
+* php bin/console doctrine:schema:update --force  
+* php bin/console cache:clear  
 
 
 

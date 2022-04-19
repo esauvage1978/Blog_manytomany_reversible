@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EventRepository extends ServiceEntityRepository
 {
+    const ALIAS='e';
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Event::class);
@@ -43,6 +45,18 @@ class EventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findAllForStudent(string $studentId)
+    {
+        return $this->createQueryBuilder(self::ALIAS)
+            ->select(self::ALIAS)
+            ->leftJoin(self::ALIAS . '.students' , StudentRepository::ALIAS )
+            ->where(StudentRepository::ALIAS . '.id = :student')
+            ->setParameter('student', $studentId)
+            ->orderBy(self::ALIAS . '.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
